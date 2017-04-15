@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=SubArray()
+comment1.params=start\ end\ arr
+comment1.target=SubArray(int,\ int,\ int[])
+comment2.params=arr
+comment2.target=void\ calcSum(int[])
+comment3.params=toAdd
+comment3.target=void\ addToSum(int)
+comment4.params=toSet
+comment4.target=void\ setSum(int)
+numComments=5
