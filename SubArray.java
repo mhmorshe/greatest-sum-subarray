@@ -15,34 +15,79 @@ public class SubArray
     }
     
     
-    //this constructor creates a new sum array given the start and end index and the original array
-    public SubArray(int start, int end, int arr[])
-    {
-        startIndex = 0;
-        endIndex = 0;
-        this.calcSum(arr);
-    }
+
+
     
-    
-    //this method calculate the value of sum given the original array
-    public void calcSum(int arr[])
+    public void pintSubArray(int arr[])
     {
-        sum = 0;
-        for(int i = 0; i < arr.length; i++)
+        if(startIndex == -1 || endIndex == -1)//if the sub array is the empty array
         {
-            sum += arr[i];
+            System.out.println("The sum is 0");
+            System.out.println("The sub array is []");
+        }
+        else
+        {
+            System.out.println("The sum is " + sum);
+            System.out.print("The sub array is [" );
+            for(int i = startIndex; i < endIndex; i++)
+            {
+                System.out.print(arr[i] + ", ");
+            }
+            System.out.print(arr[endIndex] +  "]\n");
         }
     }
     
-    //this method will add a value to the sum
-    public void addToSum(int toAdd)
-    {
-        sum += toAdd;
-    }
     
-    public void setSum(int toSet)
+    
+    
+    
+    
+    public void getMaxSumSubArray(int arr[])
     {
-        sum = toSet;
+        //This is the sub array that will hold the max sum sub array
+        this.startIndex = 0;
+        this.endIndex = 0;
+        this.sum = arr[0];
+        
+        //this sub array will hold the current max form Kadanes algorithm
+        SubArray currentMax = new SubArray();
+        currentMax.sum = arr[0];
+        
+        
+        //loop through the array running Kadane's algorithm
+        for(int i = 1; i < arr.length; i++)
+        {
+            if(currentMax.sum < 0)
+            {
+                currentMax.startIndex = i;
+                currentMax.endIndex = i;
+                currentMax.sum = arr[i];
+            }
+            else
+            {
+                //currentMax = new SubArray(currentMax.startIndex, i, arr);
+                currentMax.endIndex = i;
+                currentMax.sum += arr[i];
+
+            }
+            
+            if(currentMax.sum > this.sum)
+            {
+                this.startIndex = currentMax.startIndex;
+                this.endIndex = currentMax.endIndex;
+                this.sum = currentMax.sum;
+            }
+        }
+       
+        //if the global max sum is 0 then every element in the array was negative, the sub array should just be the empty array
+       if(this.sum < 0)
+       {
+           this.startIndex = -1;
+           this.endIndex = -1;
+           this.sum = 0;
+       }
+        
+        
     }
   
 }
